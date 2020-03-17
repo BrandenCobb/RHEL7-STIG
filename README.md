@@ -40,8 +40,8 @@ Role Variables
 | `rhel7stig_tftp_required` | `no` | If set to `no`, remove `tftp` client and server packages. |
 | `rhel7stig_autofs_required` | `no` | If set to `no`, disable `autofs` service. |
 | `rhel7stig_kdump_required` | `no` | If set to `no`, disable `kdump` service. |
-| `rhel7stig_snmp_community` | `Endgam3Ladyb0g` | SNMP community string that will replace `public` and `private` in `snmpd.conf`. |
-| `rhel7stig_bootloader_password` | `Boot1tUp!` | GRUB2 bootloader password. This should be stored in an Ansible Vault. |
+| `rhel7stig_snmp_community` | `Th1sSh0u1dB3Ch4ng3d` | SNMP community string that will replace `public` and `private` in `snmpd.conf`. |
+| `rhel7stig_bootloader_password` | `Th1sSh0u1dB3Ch4ng3d` | GRUB2 bootloader password. This should be stored in an Ansible Vault. |
 | `rhel7stig_boot_superuser` | `root` | Used to set the boot superuser in the GRUB2 config. |
 | `rhel7stig_boot_password_config` | [see defaults/main.yml](./defaults/main.yml) | GRUB2 bootloader password configuration. |
 | `rhel7stig_aide_cron` | [see defaults/main.yml](./defaults/main.yml) | AIDE Cron settings |
@@ -66,13 +66,18 @@ None
 
 Example Playbook
 ----------------
-
-    - hosts: servers
+  vi rhel7-stig.yml:
+    - hosts: server
+      become: yes
       roles:
         - role: rhel7-stig
-          when:
-            - ansible_os_family == 'RedHat'
-            - ansible_distribution_major_version | version_compare('7', '=')
+
+  vi hosts:
+    [servers]
+    ips
+
+  run with:
+    ansible-playbook -i hosts rhel7-stig.yml -Kk -u user
 
 License
 -------
