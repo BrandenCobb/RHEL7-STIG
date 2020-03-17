@@ -66,17 +66,20 @@ None
 
 Example Playbook
 ----------------
-vi rhel7-stig.yml:
+rhel7-stig.yml:
+----------------
     - hosts: server
       become: yes
       roles:
         - role: rhel7-stig
 
-vi hosts:
+hosts:
+----------------
     [servers]
     ips
 
-run with:
+Run:
+----------------
     ansible-playbook -i hosts rhel7-stig.yml -Kk -u user
 
 License
